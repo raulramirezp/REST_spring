@@ -1,22 +1,8 @@
 package com.endava.internship8.jersey.services;
 
-import com.endava.internship8.jersey.controllers.MainCastController;
-import com.endava.internship8.jersey.domain.Movie;
-import com.endava.internship8.jersey.domain.MovieCast;
-import com.endava.internship8.jersey.domain.MovieRank;
-import io.vavr.collection.List;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 /*
 import static com.endava.internship8.jersey.services.ControllerTestUtils.MovieFactory.insertNullsInMovieList;

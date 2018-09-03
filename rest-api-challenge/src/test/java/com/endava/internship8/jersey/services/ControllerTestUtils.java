@@ -1,13 +1,5 @@
 package com.endava.internship8.jersey.services;
 
-import com.endava.internship8.jersey.domain.Movie;
-import com.endava.internship8.jersey.domain.MovieCast;
-import com.endava.internship8.jersey.domain.MovieRank;
-import io.vavr.Function2;
-import io.vavr.collection.HashMap;
-import io.vavr.collection.List;
-import io.vavr.collection.Map;
-
 public class ControllerTestUtils {
 /*
     public static List<Movie> getTypeMovieList(int listSize, String movieType) {

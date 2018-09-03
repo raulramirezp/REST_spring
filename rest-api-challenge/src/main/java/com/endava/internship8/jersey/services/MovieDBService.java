@@ -17,9 +17,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@Configuration
-@EnableScheduling
 public class MovieDBService {
 
     private List<MovieCast> movieCastsList = new ArrayList<>();
@@ -30,34 +27,35 @@ public class MovieDBService {
         return   mapper.readValue(new URL("https://api.themoviedb.org/3/discover/movie?api_key=0c40466fd15a9554a83e25730302cb92&sort_by=popularity.desc"), PopularMovies.class);
     }
 
-    @Scheduled(fixedRate = 2000)
-    public void PopularMovies()  throws IOException{
+    public List<MovieCast> MoviesCasts()  throws IOException{
 
         this.movies = getMovies();
         movieCastsList = this.movies.getResults().stream()
                 .sorted(Comparator.comparing(Movie::getPopularity).reversed())
                 .limit(20)
-                .map(i -> {
-                    MovieCast theMovie = null;
+                .map(movie -> {
+                    MovieCast theMovieCast = null;
                     try {
-                        theMovie = getMovieCast(i.getId().toString());
-                        theMovie.setTitle(i.getTitle());
-                        theMovie.setPopularity(i.getPopularity());
+                        theMovieCast = getMovieCast(movie.getId().toString());
+                        theMovieCast.setMovieId(movie.getId());
+/*                        theMovieCast.setTitle(movie.getTitle());
+                        theMovieCast.setPopularity(movie.getPopularity());*/
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    return theMovie;
+                    return theMovieCast;
                 }).collect(Collectors.toList());
-        System.out.println(movies.getResults());
+     //   System.out.println(movies.getResults());
+        return movieCastsList;
     }
 
     public void setMovies(PopularMovies movies) {
         this.movies = movies;
     }
 
-    public List<Movie> getPopularMovies(){
+    public PopularMovies getPopularMovies(){
 
-        return this.movies.getResults();
+        return this.movies;
     }
 
     public MovieCast getMovieCast(String id) throws IOException {
@@ -66,7 +64,7 @@ public class MovieDBService {
         return movieCast;
     }
 
-    public List<MovieCast> getMoviesCast() {
+    public  List<MovieCast> getMoviesCast() {
         return movieCastsList;
     }
 
